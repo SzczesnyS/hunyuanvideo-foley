@@ -1,0 +1,100 @@
+name: Sync to Pages Repository
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tailwind.config.mjs'
+      - 'tsconfig.json'
+      - 'svelte.config.js'
+      - '.github/workflows/astro.yml'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Clone pages repository
+        run: |
+          git clone https://${{ secrets.PAGES_TOKEN }}@github.com/SzczesnyS/hunyuanvideo-foley.git pages-repo
+
+      - name: Copy website files
+        run: |
+          # 清空目标仓库（保留.git）
+          find pages-repo -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          
+          # 复制网页相关文件
+          cp -r src/ pages-repo/
+          cp -r public/ pages-repo/
+          cp astro.config.mjs pages-repo/
+          cp package.json pages-repo/
+          cp package-lock.json pages-repo/
+          cp tailwind.config.mjs pages-repo/
+          cp tsconfig.json pages-repo/
+          cp svelte.config.js pages-repo/
+          
+          # 复制必要的配置文件
+          cp .gitignore pages-repo/ 2>/dev/null || echo ".gitignore not found, skipping"
+          
+          # 创建或更新README
+          echo "# HIFI-Foley Demo" > pages-repo/README.md
+          echo "" >> pages-repo/README.md
+          echo "这是HIFI-Foley项目的演示网站。" >> pages-repo/README.md
+          echo "" >> pages-repo/README.md
+          echo "🔗 [查看演示网站](https://SzczesnyS.github.io/hunyuanvideo-foley)" >> pages-repo/README.md
+          echo "" >> pages-repo/README.md
+          echo "本仓库通过GitHub Actions自动同步自主项目仓库。" >> pages-repo/README.md
+          echo "" >> pages-repo/README.md
+          echo "## 项目特性" >> pages-repo/README.md
+          echo "- 🎵 高质量音频生成" >> pages-repo/README.md
+          echo "- 🎬 视频音效同步" >> pages-repo/README.md
+          echo "- 🚀 实时预览功能" >> pages-repo/README.md
+          
+          # 复制GitHub Actions配置
+          mkdir -p pages-repo/.github/workflows/
+          cp .github/workflows/astro.yml pages-repo/.github/workflows/
+
+      - name: Update Astro config for GitHub Pages
+        run: |
+          cd pages-repo
+          # 备份原配置
+          cp astro.config.mjs astro.config.mjs.bak
+          
+          # 更新astro.config.mjs添加site和base配置
+          sed -i '/export default defineConfig({/a\  site: "https://SzczesnyS.github.io",\n  base: "/hunyuanvideo-foley",' astro.config.mjs
+          
+          echo "Updated astro.config.mjs:"
+          head -15 astro.config.mjs
+
+      - name: Commit and push to pages repo
+        run: |
+          cd pages-repo
+          git add .
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🚀 Sync from main repo: $(date '+%Y-%m-%d %H:%M:%S') - Commit: ${{ github.sha }}"
+            git push
+          fi
+
+      - name: Summary
+        run: |
+          echo "✅ 同步完成！"
+          echo "📁 目标仓库: SzczesnyS/hunyuanvideo-foley"
+          echo "🌐 网站地址: https://SzczesnyS.github.io/hunyuanvideo-foley"
+          echo "📝 请在目标仓库启用GitHub Pages"
