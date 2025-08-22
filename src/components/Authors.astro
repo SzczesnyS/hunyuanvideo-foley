@@ -6,13 +6,28 @@ interface Props {
 }
 
 const { authors } = Astro.props;
+
+// 收集所有独特的机构
+const institutions = new Set<string>();
+authors.forEach(author => {
+  if (author.institution) {
+    institutions.add(author.institution);
+  }
+});
+
+// 创建机构到编号的映射
+const institutionMap = new Map<string, number>();
+Array.from(institutions).forEach((institution, index) => {
+  institutionMap.set(institution, index + 1);
+});
 ---
 
-<div class="flex flex-row gap-x-8 gap-y-4 flex-wrap justify-center">
-  {
-    authors.map((author) => (
-      <div class="flex flex-col items-center text-center">
-        <span class="text-xl flex flex-row">
+<div class="flex flex-col items-center gap-6">
+  <!-- 作者列表 -->
+  <div class="flex flex-row gap-x-8 gap-y-4 flex-wrap justify-center">
+    {
+      authors.map((author) => (
+        <span class="text-xl flex flex-row items-center">
           {author.url ? (
             <a href={author.url} class="">
               {author.name}
@@ -20,17 +35,33 @@ const { authors } = Astro.props;
           ) : (
             author.name
           )}
-          {author.notes && (
-            <sup class="text-xl">
-              {author.notes.map(
+          {(author.notes || author.institution) && (
+            <sup class="text-base ml-1">
+              {/* 显示自定义注释 */}
+              {author.notes && author.notes.map(
                 (note, index, array) =>
                   note + (index < array.length - 1 ? "," : "")
               )}
+              {/* 如果既有notes又有institution，添加逗号分隔 */}
+              {author.notes && author.institution && ","}
+              {/* 显示机构编号 */}
+              {author.institution && institutionMap.get(author.institution)}
             </sup>
           )}
         </span>
-        {author.institution && <p>{author.institution}</p>}
-      </div>
-    ))
-  }
+      ))
+    }
+  </div>
+  
+  <!-- 机构列表 -->
+  {institutions.size > 0 && (
+    <div class="flex flex-col gap-2 text-center text-base text-gray-600 dark:text-gray-400">
+      {Array.from(institutions).map((institution, index) => (
+        <div>
+          <sup class="mr-1">{index + 1}</sup>
+          {institution}
+        </div>
+      ))}
+    </div>
+  )}
 </div>

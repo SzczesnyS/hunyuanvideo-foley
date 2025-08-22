@@ -46,7 +46,7 @@ const VideoComparison: React.FC<{ data: VideoData }> = ({ data }) => {
               preload="metadata"
               style={{ minHeight: '250px', aspectRatio: '16/9' }}
             >
-              <source src={`/${videoPath}`} type="video/mp4" />
+              <source src={videoPath} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
