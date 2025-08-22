@@ -33,3 +33,22 @@ src/pages/stress-test.mdx
 *.mkv
 *.webm
 public/videos/
+
+# Backup files
+*.backup
+
+# Development/build files
+generate_model_comparison.py
+upload_result.log
+video_url_mapping.json
+signed_video_url_mapping.json
+
+# Test data files
+public/test_*.csv
+public/screenshot-dark.png
+
+# Unused assets
+src/assets/outside.mp4
+src/assets/transformer.webp
+src/assets/dogs-diffc.png
+src/assets/dogs-true.png
