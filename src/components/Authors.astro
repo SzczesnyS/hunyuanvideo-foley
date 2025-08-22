@@ -40,12 +40,12 @@ authors.forEach(author => {
 const sortedInstitutions = Array.from(institutionMap.entries()).sort((a, b) => a[0] - b[0]);
 ---
 
-<div class="flex flex-col items-center gap-6">
+<div class="flex flex-col items-center gap-4">
   <!-- 作者列表 -->
-  <div class="flex flex-row gap-x-8 gap-y-4 flex-wrap justify-center">
+  <div class="flex flex-row gap-x-6 gap-y-3 flex-wrap justify-center">
     {
       authors.map((author) => (
-        <span class="text-xl flex flex-row items-center">
+        <span class="text-lg flex flex-row items-center">
           {author.url ? (
             <a href={author.url} class="">
               {author.name}
@@ -54,7 +54,7 @@ const sortedInstitutions = Array.from(institutionMap.entries()).sort((a, b) => a
             author.name
           )}
           {author.notes && (
-            <sup class="text-base ml-1">
+            <sup class="text-sm ml-1">
               {author.notes.map(
                 (note, index, array) =>
                   note + (index < array.length - 1 ? "," : "")

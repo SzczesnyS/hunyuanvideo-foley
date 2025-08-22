@@ -20,20 +20,20 @@ const mainTitle = titleParts[0]; // "HunyuanVideo-Foley"
 const subtitle = titleParts[1] || ""; // "Multimodal Diffusion with Representation Alignment for High-Fidelity Foley Audio Generation"
 ---
 
-<header class="flex flex-col gap-10 items-center mb-6">
-  <div class="flex flex-col gap-4 items-center text-center">
-    <h1 class="text-7xl font-bold italic bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent" 
-        style="font-family: 'Orbitron', monospace; font-weight: 800; letter-spacing: 0.05em;">
+<header class="flex flex-col gap-8 items-center mb-6">
+  <div class="flex flex-col gap-3 items-center text-center">
+    <h1 class="text-7xl font-bold italic text-black dark:text-white" 
+        style="font-family: 'Inter', 'Noto Sans', sans-serif; font-weight: 900; letter-spacing: 0.02em;">
       {mainTitle}
     </h1>
     {subtitle && (
-      <h2 class="text-lg text-gray-700 dark:text-gray-300 max-w-6xl leading-tight font-normal px-4" 
+      <h2 class="text-xl text-gray-700 dark:text-gray-300 max-w-6xl leading-tight font-bold px-4" 
           style="font-family: 'Noto Sans', sans-serif;">
         {subtitle}
       </h2>
     )}
   </div>
-  <div class="flex flex-col gap-6 items-center">
+  <div class="flex flex-col gap-4 items-center">
     <Authors authors={authors} />
     {conference && <p class="text-center">{conference}</p>}
     {notes && <Notes notes={notes} />}

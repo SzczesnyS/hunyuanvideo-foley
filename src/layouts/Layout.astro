@@ -33,7 +33,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -49,23 +49,6 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     class="flex flex-col gap-4 items-center pt-12 pb-6 w-full [&>*]:px-6 [&>*]:max-w-[90rem] [&>astro-island>*]:px-6 [&>astro-island>*]:max-w-[90rem] text-zinc-900 bg-zinc-50 dark:text-zinc-50 dark:bg-zinc-900"
   >
     <slot />
-    <footer class="m-auto">
-      <p
-        class="text-zinc-500 dark:text-zinc-400 text-sm [&_a]:text-blue-500 dark:[&_a]:text-blue-300"
-      >
-        This page was built using <a
-          href="https://github.com/RomanHauksson/academic-project-astro-template"
-          >Roman Hauksson's academic project page template</a
-        >, which was adapted from <a
-          href="https://github.com/eliahuhorwitz/Academic-project-page-template"
-          >Eliahu Horwitz's template</a
-        >, which was adapted from <a href="https://nerfies.github.io/"
-          >Keunhong Park's project page for <i>Nerfies</i></a
-        >. It is licensed under a <a
-          href="http://creativecommons.org/licenses/by-sa/4.0/"
-          >Creative Commons Attribution-ShareAlike 4.0 International License</a
-        >.
-      </p>
-    </footer>
+
   </body>
 </html>

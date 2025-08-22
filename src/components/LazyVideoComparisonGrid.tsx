@@ -91,9 +91,6 @@ export const LazyVideoComparisonGrid: React.FC<LazyVideoComparisonGridProps> = (
             </svg>
             Show All Results ({dataList.length - initialCount} more)
           </button>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 max-w-md mx-auto">
-            ⚠️ <strong>Performance Notice:</strong> Loading all videos may cause slower page rendering due to the large number of media files.
-          </p>
         </div>
       )}
       
