@@ -23,7 +23,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
 
-    <link rel="icon" type="image/png" href={prefix + favicon} />
+    <link rel="icon" type="image/svg+xml" href={prefix + favicon} />
 
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
@@ -33,7 +33,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link

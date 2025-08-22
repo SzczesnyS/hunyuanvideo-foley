@@ -13,10 +13,26 @@ interface Props {
 }
 
 const { title, authors, conference, notes, links } = Astro.props as Props;
+
+// 分割标题
+const titleParts = title.split(': ');
+const mainTitle = titleParts[0]; // "HunyuanVideo-Foley"
+const subtitle = titleParts[1] || ""; // "Multimodal Diffusion with Representation Alignment for High-Fidelity Foley Audio Generation"
 ---
 
 <header class="flex flex-col gap-10 items-center mb-6">
-  <h1>{title}</h1>
+  <div class="flex flex-col gap-4 items-center text-center">
+    <h1 class="text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent" 
+        style="font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 700; letter-spacing: -0.02em;">
+      {mainTitle}
+    </h1>
+    {subtitle && (
+      <h2 class="text-2xl text-gray-700 dark:text-gray-300 max-w-5xl leading-relaxed font-normal" 
+          style="font-family: 'Noto Sans', sans-serif;">
+        {subtitle}
+      </h2>
+    )}
+  </div>
   <div class="flex flex-col gap-6 items-center">
     <Authors authors={authors} />
     {conference && <p class="text-center">{conference}</p>}

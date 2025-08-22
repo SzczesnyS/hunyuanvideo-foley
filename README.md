@@ -1,8 +1,10 @@
-# HunyuanVideo-Foley Demo
+# HunyuanVideo-Foley Demo Page
 
-这是HunyuanVideo-Foley项目的演示网站。
+This is HunyuanVideo-Foley demo page.
 
-🔗 [查看演示网站](https://SzczesnyS.github.io/hunyuanvideo-foley)
+🔗 [Official Repo](https://github.com/Tencent-Hunyuan/HunyuanVideo-Foley)
+🔗 [HuggingFace](https://huggingface.co/tencent/HunyuanVideo-Foley)
+🔗 [Demo Page](https://SzczesnyS.github.io/hunyuanvideo-foley)
 
-本仓库通过GitHub Actions自动同步自主项目仓库。
+
 
