@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/Layout.astro
-title: Research Project Page Template
+title: "HunyuanVideo-Foley: Multimodal Diffusion with Representation Alignment for High-Fidelity Foley Audio Generation"
 description: Simple project page template for your research paper, built with Astro and Tailwind CSS
 favicon: favicon.svg
 thumbnail: screenshot-light.png
@@ -17,18 +17,31 @@ import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 
 import { ImageComparison } from "../components/ImageComparison.tsx";
+import { VideoComparisonGrid } from "../components/VideoComparison.tsx";
+import { LazyVideoComparison } from "../components/LazyVideoComparison.tsx";
+import { LazyVideoComparisonGrid } from "../components/LazyVideoComparisonGrid.tsx";
+import { ModelComparisonGrid } from "../components/ModelComparisonGrid.tsx";
 
 import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
 import Splat from "../components/Splat.tsx"
 import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
-
+import architecture from "../assets/TV2A-arch.png"  // 取消注释并替换为您的图片文件名
+import data_pipeline from "../assets/data_pipeline.png"  // 取消注释并替换为您的图片文件名
+import demoVideosRaw from "../assets/demo_videos.jsonl?raw";
+import moviegenBenchmarkRaw from "../assets/moviegen_benchmark.jsonl?raw";
+import modelComparisonRaw from "../assets/model_comparison_videos.jsonl?raw";
 
 import CodeBlock from "../components/CodeBlock.astro";
 import Table from "../components/Table.astro";
 export const components = {pre: CodeBlock, table: Table}
 
+export const demoVideos = demoVideosRaw.trim().split('\n').map(line => JSON.parse(line));
+export const moviegenBenchmark = moviegenBenchmarkRaw.trim().split('\n').map(line => JSON.parse(line));
+export const modelComparison = modelComparisonRaw.trim().split('\n').map(line => JSON.parse(line));
+
+{/* Original author info - uncomment after paper acceptance
 <Header
   title={frontmatter.title}
   authors={[
@@ -53,7 +66,7 @@ export const components = {pre: CodeBlock, table: Table}
       institution: "Institution Four",
     },
   ]}
-  conference="Conference Name"
+  conference="AAAI 2026"
   notes={[
     {
       symbol: "*",
@@ -87,85 +100,174 @@ export const components = {pre: CodeBlock, table: Table}
     }
   ]}
   />
+*/}
 
-<Video source={outside} />
+<Header
+  title={frontmatter.title}
+  authors={[
+    {
+      name: "Sizhe Shan",
+      institution: "Tencent Hunyuan, Zhejiang University",
+      notes: ["1,2", "*"],
+    },
+    {
+      name: "Qiulin Li",
+      institution: "Tencent Hunyuan, Nanjing University of Aeronautics and Astronautics",
+      notes: ["1,3", "*"],
+    },
+    {
+      name: "Yutao Cui",
+      institution: "Tencent Hunyuan",
+      notes: ["1"],
+    },
+    {
+      name: "Miles Yang",
+      institution: "Tencent Hunyuan",
+      notes: ["1"],
+    },
+    {
+      name: "Zhao Zhong",
+      institution: "Tencent Hunyuan",
+      notes: ["1"],
+    },
+    {
+      name: "Yuehai Wang",
+      institution: "Zhejiang University",
+      notes: ["2"],
+    },
+    {
+      name: "Qun Yang",
+      institution: "Nanjing University of Aeronautics and Astronautics",
+      notes: ["3"],
+    },
+    {
+      name: "Jin Zhou",
+      institution: "Tencent Hunyuan",
+      notes: ["1", "†"],
+    },
+  ]}
+  notes={[
+    {
+      symbol: "*",
+      text: "Equal contribution",
+    },
+    {
+      symbol: "†",
+      text: "Corresponding author",
+    },
+  ]}
+  links={[
+    {
+      name: "Model",
+      url: "https://huggingface.co/tencent/HunyuanVideo-Foley",
+      icon: "simple-icons:huggingface",
+    },
+    {
+      name: "Code",
+      url: "https://github.com/Tencent-Hunyuan/HunyuanVideo-Foley",
+      icon: "ri:github-line",
+    },
+    {
+      name: "arXiv",
+      url: "",
+      icon: "academicons:arxiv",
+    }
+  ]}
+  />
+
+{/* <Video source={outside} /> */}
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
-
+{/* This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps> */}
+Recent advances in video generation produce visually realistic content, yet the absence of synchronized audio severely compromises immersion. To address key challenges in Video-to-Audio (V2A) generation, including multimodal data scarcity, modality imbalance and limited audio quality in existing V2A methods, we propose HunyuanVideo-Foley, an end-to-end Text-Video-to-Audio (TV2A) framework that synthesizes high-fidelity audio precisely aligned with visual dynamics and semantic context. Our approach incorporates three core innovations: (1) a scalable data pipeline curating 100k-hour multimodal datasets via automated annotation; (2) a novel multimodal diffusion transformer resolving modal competition through dual-stream temporal fusion and cross-modal semantic injection; (3) representation alignment (REPA) using self-supervised audio features to guide latent diffusion training, efficiently improving generation stability and audio quality. Comprehensive evaluations demonstrate that HunyuanVideo-Foley achieves new state-of-the-art performance across audio fidelity, visual alignment and distribution matching.
 </HighlightedSection>
 
-## Figures
 
-Use the figure component to display images, videos, equations, or any other element, with an optional caption.
+## Data Pipeline
 
 <Figure>
-  <Image slot="figure" source={transformer} altText="Diagram of the transformer deep learning architecture." />
-  <span slot="caption">Diagram of the transformer deep learning architecture.</span>
+  <Image slot="figure" source={data_pipeline} altText="Overall architecture of HunyuanVideo-Foley framework" />
+  <span slot="caption">Data pipeline for filtering video-audio data. The workflow illustrates the processing steps from the raw video database to the filtered video-audio database.</span>
 </Figure>
 
-## Image comparison slider
 
-An interactive, accessible slider component with keyboard navigation.
+## Method Overview
+
 <Figure>
-  <ImageComparison slot="figure" client:load imageUrlOne={dogsDiffc.src} imageUrlTwo={dogsTrue.src} altTextOne="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" altTextTwo="Original photo of two dogs running side-by-side in shallow water" />
-  <span slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the <a href="https://jeremyiv.github.io/diffc-project-page/">DiffC algorithm</a>.</span>
+  <Image slot="figure" source={architecture} altText="Overall architecture of HunyuanVideo-Foley framework" />
+  {/* <span slot="caption">**Overview of the HunyuanVideo-Foley model architecture.** The proposed model integrates encoded text (CLAP), visual (SigLIP-2), and audio (DAC-VAE) inputs through a hybrid framework with $N_1$ multimodal transformer blocks followed by $N_2$ unimodal transformer blocks. The hybrid transformer blocks are modulated and gated with synchronization features and timestep embeddings. A pre-trained ATST-Frame is used to compute REPA loss with latnet representations from a unimodal transformer block. The generated audio latent are decoded into audio waveforms by the DAC-VAE decoder.</span> */}
+  <div slot='caption'>
+    <p>**Overview of the HunyuanVideo-Foley model architecture.** The proposed model integrates encoded text (CLAP), visual (SigLIP-2), and audio (DAC-VAE) inputs through a hybrid framework with multimodal transformer blocks followed by unimodal transformer blocks. The hybrid transformer blocks are modulated and gated with synchronization features and timestep embeddings. A pre-trained ATST-Frame is used to compute REPA loss with latnet representations from a unimodal transformer block. The generated audio latent are decoded into audio waveforms by the DAC-VAE decoder.</p>
+  </div>
 </Figure>
 
-## Two columns
 
-Use the two columns component to display two columns of content. In this example, the first column contains a figure with a YouTube video and the second column contains a figure with a custom [React](https://react.dev/) component. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
+## Experiments Results
 
-<TwoColumns>
-  <Figure slot="left">
-    <YouTubeVideo slot="figure" videoId="wjZofJX0v4M" />
-    <span slot="caption">Take a look at this YouTube video.</span>
-  </Figure>
-  <Figure slot="right">
-    <Splat slot="figure" client:idle />
-    <span slot="caption">Now look at this <a href="https://en.wikipedia.org/wiki/Gaussian_splatting">Gaussian splat</a>, rendered with a React component.</span>
-  </Figure>
-</TwoColumns>
+### Objective Evaluation Results on Kling-Audio-Eval
 
-## Heading levels
+| Method | FD<sub>PaNNs</sub>↓ | FD<sub>PaSST</sub>↓ | KL↓ | IS↑ | PQ↑ | PC↓ | CE↑ | CU↑ | IB↑ | DeSync↓ | CLAP↑ |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| FoleyCrafter | 22.30 | 322.63 | 2.47 | 7.08 | 6.05 | 2.91 | 3.28 | 5.44 | 0.22 | 1.23 | 0.22 |
+| V-AURA | 33.15 | 474.56 | 3.24 | 5.80 | 5.69 | 3.98 | 3.13 | 4.83 | 0.25 | 0.86 | 0.13 |
+| Frieren | 16.86 | 293.57 | 2.95 | 7.32 | 5.72 | **2.55** | 2.88 | 5.10 | 0.21 | 0.86 | 0.16 |
+| MMAudio | 9.01 | 205.85 | 2.17 | **9.59** | 5.94 | 2.91 | **3.30** | 5.39 | 0.30 | 0.56 | **0.27** |
+| ThinkSound | 9.92 | 228.68 | 2.39 | 6.86 | 5.78 | 3.23 | 3.12 | 5.11 | 0.22 | 0.67 | 0.22 |
+| **HunyuanVideo-Foley (ours)** | **6.07** | **202.12** | **1.89** | 8.30 | **6.12** | 2.76 | 3.22 | **5.53** | **0.38** | **0.54** | 0.24 |
 
-Use headings to divide your content into sections.
+### Objective Evaluation Results on VGGSound-Test
 
-### Heading 3
+| Method | FD<sub>PaNNs</sub>↓ | FD<sub>PaSST</sub>↓ | KL↓ | IS↑ | PQ↑ | PC↓ | CE↑ | CU↑ | IB↑ | DeSync↓ | CLAP↑ |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| FoleyCrafter | 20.65 | 171.43 | 2.26 | 14.58 | 6.33 | 2.87 | 3.60 | 5.74 | 0.26 | 1.22 | 0.19 |
+| V-AURA | 18.91 | 291.72 | 2.40 | 8.58 | 5.70 | 4.19 | 3.49 | 4.87 | 0.27 | 0.72 | 0.12 |
+| Frieren | 11.69 | 83.17 | 2.75 | 12.23 | 5.87 | 2.99 | 3.54 | 5.32 | 0.23 | 0.85 | 0.11 |
+| MMAudio | **7.42** | 116.92 | **1.77** | **21.00** | 6.18 | 3.17 | **4.03** | 5.61 | 0.33 | **0.47** | **0.25** |
+| ThinkSound | 8.46 | **67.18** | 1.90 | 11.11 | 5.98 | 3.61 | 3.81 | 5.33 | 0.24 | 0.57 | 0.16 |
+| **HunyuanVideo-Foley (ours)** | 11.34 | 145.22 | 2.14 | 16.14 | **6.40** | **2.78** | 3.99 | **5.79** | **0.36** | 0.53 | 0.24 |
 
-Go down a level to heading 3...
+### Objective and Subjective Evaluation Results on MovieGen-Audio-Bench
 
-#### Heading 4
+| Method | PQ↑ | PC↓ | CE↑ | CU↑ | IB↑ | DeSync↓ | CLAP↑ | MOS-Q↑ | MOS-S↑ | MOS-T↑ |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| FoleyCrafter | 6.27 | **2.72** | 3.34 | 5.68 | 0.17 | 1.29 | 0.14 | 3.36±0.78 | 3.54±0.88 | 3.46±0.95 |
+| V-AURA | 5.82 | 4.30 | 3.63 | 5.11 | 0.23 | 1.38 | 0.14 | 2.55±0.97 | 2.60±1.20 | 2.70±1.37 |
+| Frieren | 5.71 | 2.81 | 3.47 | 5.31 | 0.18 | 1.39 | 0.16 | 2.92±0.95 | 2.76±1.20 | 2.94±1.26 |
+| MMAudio | 6.17 | 2.84 | 3.59 | 5.62 | 0.27 | 0.80 | **0.35** | 3.58±0.84 | 3.63±1.00 | 3.47±1.03 |
+| ThinkSound | 6.04 | 3.73 | 3.81 | 5.59 | 0.18 | 0.91 | 0.20 | 3.20±0.97 | 3.01±1.04 | 3.02±1.08 |
+| **HunyuanVideo-Foley (ours)** | **6.59** | 2.74 | **3.88** | **6.13** | **0.35** | **0.74** | 0.33 | **4.14±0.68** | **4.12±0.77** | **4.15±0.75** |
 
-...and down again to heading 4.
+Our experimental results demonstrate that HunyuanVideo-Foley achieves superior performance across multiple evaluation datasets, consistently outperforming baseline methods in key metrics related to audio quality, temporal alignment, and cross-modal consistency.
 
-## LaTeX
+## Results and Comparisons
 
-You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
+Our HunyuanVideo-Foley framework demonstrates superior performance compared to existing methods. Below are video-audio generation comparisons across different methods:
 
-<LaTeX formula="\int_a^b f(x) dx" />
+<LazyVideoComparisonGrid client:load dataList={demoVideos} initialCount={5} />
 
-## Tables
+{/* ## MovieGen Benchmark Results
 
-You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
+We evaluate our HunyuanVideo-Foley model against five state-of-the-art baselines on the MovieGen benchmark dataset. The comparison demonstrates the effectiveness of our approach across different video scenarios:
 
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
+<LazyVideoComparison client:load dataList={moviegenBenchmark} /> */}
 
-## BibTeX citation
+## Comprehensive Model Comparison
 
-```bibtex
+We provide an extensive comparison of our HunyuanVideo-Foley model against five state-of-the-art methods across 28 different video samples. Each comparison includes the original prompt used for generation, allowing for detailed analysis of how different models interpret and synthesize audio for the same visual content.
+
+<ModelComparisonGrid client:load dataList={modelComparison} itemsPerPage={4} />
+
+
+{/* ## BibTeX citation */}
+
+{/* ```bibtex
 @misc{roman2024academic,
   author = "{Roman Hauksson}",
   title = "Academic Project Page Template",
   year = "2024",
   howpublished = "\url{https://research-template.roman.technology}",
 }
-```
+``` */}

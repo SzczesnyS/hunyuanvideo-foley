@@ -17,5 +17,12 @@ export default defineConfig({
         dark: 'github-dark',
       },
     }
+  },
+  vite: {
+    server: {
+      watch: {
+        ignored: ['**/videos/**']
+      }
+    }
   }
 });

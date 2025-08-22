@@ -25,3 +25,11 @@ pnpm-debug.log*
 
 # stress test
 src/pages/stress-test.mdx
+
+# Video files (uploaded to COS)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+public/videos/
