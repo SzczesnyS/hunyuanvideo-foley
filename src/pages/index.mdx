@@ -23,8 +23,9 @@ import { LazyVideoComparisonGrid } from "../components/LazyVideoComparisonGrid.t
 import { ModelComparisonGrid } from "../components/ModelComparisonGrid.tsx";
 
 import Splat from "../components/Splat.tsx"
-import architecture from "../assets/TV2A-arch.png"  // 取消注释并替换为您的图片文件名
-import data_pipeline from "../assets/data_pipeline.png"  // 取消注释并替换为您的图片文件名
+import architecture from "../assets/TV2A-arch.png"  
+import data_pipeline from "../assets/data_pipeline.png"  
+import radar_charts from "../../public/Radar_charts.png"  
 import demoVideosRaw from "../assets/demo_videos.jsonl?raw";
 import moviegenBenchmarkRaw from "../assets/moviegen_benchmark.jsonl?raw";
 import modelComparisonRaw from "../assets/model_comparison_videos.jsonl?raw";
@@ -177,8 +178,10 @@ export const modelComparison = modelComparisonRaw.trim().split('\n').map(line =>
 
 ## Abstract
 
-{/* This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps> */}
+<div style="text-align: justify;">
 Recent advances in video generation produce visually realistic content, yet the absence of synchronized audio severely compromises immersion. To address key challenges in Video-to-Audio (V2A) generation, including multimodal data scarcity, modality imbalance and limited audio quality in existing V2A methods, we propose HunyuanVideo-Foley, an end-to-end Text-Video-to-Audio (TV2A) framework that synthesizes high-fidelity audio precisely aligned with visual dynamics and semantic context. Our approach incorporates three core innovations: (1) a scalable data pipeline curating 100k-hour multimodal datasets via automated annotation; (2) a novel multimodal diffusion transformer resolving modal competition through dual-stream temporal fusion and cross-modal semantic injection; (3) representation alignment (REPA) using self-supervised audio features to guide latent diffusion training, efficiently improving generation stability and audio quality. Comprehensive evaluations demonstrate that HunyuanVideo-Foley achieves new state-of-the-art performance across audio fidelity, visual alignment and distribution matching.
+</div>
+
 </HighlightedSection>
 
 
@@ -202,6 +205,12 @@ Recent advances in video generation produce visually realistic content, yet the 
 
 
 ## Experiments Results
+
+<Figure>
+  <Image slot="figure" source={radar_charts} altText="Radar chart comparison of different methods" />
+  <span slot="caption">Radar Chart of Video-to-Audio Evaluation. It contains the results on three evaluation set: Kling-Audio-Eval,
+VGGSound-Test, and MovieGen-Audio-Bench, demonstrating that HunyuanVideo-Foley achieves comprehensive superiority.</span>
+</Figure>
 
 ### Objective Evaluation Results on Kling-Audio-Eval
 
