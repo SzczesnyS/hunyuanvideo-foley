@@ -9,8 +9,6 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://SzczesnyS.github.io",
-  base: "/hunyuanvideo-foley",
   integrations: [tailwind(), icon(), mdx(), react(), svelte()],
   markdown: {
     shikiConfig: {
