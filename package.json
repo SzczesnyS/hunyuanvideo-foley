@@ -17,6 +17,7 @@
     "@astrojs/tailwind": "^6.0.0",
     "@iconify-json/academicons": "^1.1.14",
     "@iconify-json/ri": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.48",
     "@radix-ui/react-slot": "^1.1.0",
     "@react-three/drei": "^9.107.1",
     "@react-three/fiber": "^8.16.8",
