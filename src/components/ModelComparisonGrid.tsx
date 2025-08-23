@@ -15,7 +15,7 @@ interface ModelComparisonGridProps {
 }
 
 const methodNames = {
-  'hifi-foley': 'HunyuanVideo-Foley (Ours)',
+  'hifi-foley': 'HunyuanVideo-Foley',
   'foleycrafter': 'FoleyCrafter',
   'mmaudio': 'MMAudio',
   'thinksound': 'ThinkSound',
