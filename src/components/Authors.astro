@@ -68,12 +68,13 @@ const sortedInstitutions = Array.from(institutionMap.entries()).sort((a, b) => a
   
   <!-- 机构列表 -->
   {sortedInstitutions.length > 0 && (
-    <div class="flex flex-col gap-2 text-center text-base text-gray-600 dark:text-gray-400">
-      {sortedInstitutions.map(([number, institution]) => (
-        <div>
+    <div class="text-center text-base text-gray-600 dark:text-gray-400">
+      {sortedInstitutions.map(([number, institution], index) => (
+        <span>
           <sup class="mr-1">{number}</sup>
           {institution}
-        </div>
+          {index < sortedInstitutions.length - 1 && <span class="mx-4">&nbsp;&nbsp;&nbsp;</span>}
+        </span>
       ))}
     </div>
   )}
