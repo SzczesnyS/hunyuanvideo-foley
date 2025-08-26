@@ -166,7 +166,7 @@ export const modelComparison = modelComparisonRaw.trim().split('\n').map(line =>
     },
     {
       name: "arXiv",
-      url: "",
+      url: "https://arxiv.org/abs/2508.16930",
       icon: "academicons:arxiv",
     }
   ]}
@@ -266,13 +266,16 @@ We provide an extensive comparison of our HunyuanVideo-Foley model against five 
 <ModelComparisonGrid client:load dataList={modelComparison} itemsPerPage={4} />
 
 
-{/* ## BibTeX citation */}
+## Citation
 
-{/* ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+```bibtex
+@misc{shan2025hunyuanvideofoleymultimodaldiffusionrepresentation,
+      title={HunyuanVideo-Foley: Multimodal Diffusion with Representation Alignment for High-Fidelity Foley Audio Generation}, 
+      author={Sizhe Shan and Qiulin Li and Yutao Cui and Miles Yang and Yuehai Wang and Qun Yang and Jin Zhou and Zhao Zhong},
+      year={2025},
+      eprint={2508.16930},
+      archivePrefix={arXiv},
+      primaryClass={eess.AS},
+      url={https://arxiv.org/abs/2508.16930}, 
 }
-``` */}
+```
